@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "/opt/arduino/tools/**",
+                "/opt/arduino/hardware/tools/**",
+                "/opt/arduino/hardware/arduino/avr/**",
+                "${workspaceFolder}/**",
+                "/opt/arduino/libraries/**",
+                "~/Arduino/libraries/**",
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c11",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}
