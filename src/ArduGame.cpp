@@ -83,7 +83,7 @@ void ArduGame::noTone() {
 
 #pragma region Graphics
 
-void ArduGame::update() {
+void ArduGame::updateDisplay() {
     // empty default implementation
 }
 

@@ -96,12 +96,12 @@ public:
     virtual void shiftScreen(uint8_t distance, uint8_t direction) = 0;
     virtual void drawPixel(int8_t x, int8_t y, uint8_t color = COLOR_WHITE) = 0;
     virtual void drawRect(int8_t x, int8_t y, uint8_t width, uint8_t height, uint8_t color = COLOR_WHITE) = 0;
-    virtual void fillRect(int8_t x, int8_t y, uint8_t width, uint8_t height, uint8_t color = COLOR_WHITE, uint8_t fillColor = COLOR_WHITE) = 0;
-    virtual void drawBitmap(int8_t x, int8_t y, const uint8_t* bitmap, uint8_t with = 0, uint8_t height = 0) = 0;
+    virtual void fillRect(int8_t x, int8_t y, uint8_t width, uint8_t height, uint8_t color = COLOR_WHITE) = 0;
+    virtual void drawBitmap(int8_t x, int8_t y, const uint8_t* bitmap, uint8_t width = 0, uint8_t height = 0) = 0;
     virtual void drawCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = COLOR_WHITE) = 0;
-    virtual void fillCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = COLOR_WHITE, uint8_t fillColor = COLOR_WHITE) = 0;
-    virtual void drawLine(int8_t x1, int8_t y1, int8_t x2, int8_t y2, uint8_t color = COLOR_WHITE) = 0;
-    virtual void update();
+    virtual void fillCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = COLOR_WHITE) = 0;
+    virtual void drawLine(int8_t x0, int8_t y0, int8_t x1, int8_t y1, uint8_t color = COLOR_WHITE) = 0;
+    virtual void updateDisplay();
 
     #pragma endregion
 

@@ -95,28 +95,28 @@ void TvGame::shiftScreen(uint8_t distance, uint8_t direction) {
     display.shift(distance, direction);
 }
 
-void TvGame::drawPixel(int8_t x, int8_t y, uint8_t color = WHITE) {
+void TvGame::drawPixel(int8_t x, int8_t y, uint8_t color = COLOR_WHITE) {
     display.set_pixel(x, y, color);
 }
 
-void TvGame::drawRect(int8_t x, int8_t y, uint8_t width, uint8_t height, uint8_t color = WHITE) {
+void TvGame::drawRect(int8_t x, int8_t y, uint8_t width, uint8_t height, uint8_t color = COLOR_WHITE) {
     display.draw_rect(x, y, width - 1, height - 1, color);
 }
 
-void TvGame::fillRect(int8_t x, int8_t y, uint8_t width, uint8_t height, uint8_t color = WHITE, uint8_t fillColor = WHITE) {
-    display.draw_rect(x, y, width - 1, height - 1, color, fillColor);
+void TvGame::fillRect(int8_t x, int8_t y, uint8_t width, uint8_t height, uint8_t color = COLOR_WHITE) {
+    display.draw_rect(x, y, width - 1, height - 1, color);
 }
 
-void TvGame::drawCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = WHITE) {
+void TvGame::drawCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = COLOR_WHITE) {
     display.draw_circle(x0, y0, r, color);
 }
 
-void TvGame::fillCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = WHITE, uint8_t fillColor = WHITE) {
-    display.draw_circle(x0, y0, r, color, fillColor);
+void TvGame::fillCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = COLOR_WHITE) {
+    display.draw_circle(x0, y0, r, color);
 }
 
-void TvGame::drawLine(int8_t x1, int8_t y1, int8_t x2, int8_t y2, uint8_t color = WHITE) {
-    display.draw_line(x1, y1, x2, y2, WHITE);
+void TvGame::drawLine(int8_t x0, int8_t y0, int8_t x1, int8_t y1, uint8_t color = COLOR_WHITE) {
+    display.draw_line(x0, y0, x1, y1, color);
 }
 
 void TvGame::drawBitmap(int8_t x, int8_t y, const uint8_t* bitmap, uint8_t width = 0, uint8_t height = 0) {

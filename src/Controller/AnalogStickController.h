@@ -41,7 +41,7 @@ class AnalogStickController : public BaseController {
 
 // Public methods
 public:
-    AnalogStickController(uint8_t pinSwitch = ARDUGAME_CTRL_STICK_PIN_X, uint8_t pinX = ARDUGAME_CTRL_STICK_PIN_X, uint8_t pinY = ARDUGAME_CTRL_STICK_PIN_Y);
+    AnalogStickController(uint8_t pinSwitch = ARDUGAME_CTRL_STICK_PIN_SWITCH, uint8_t pinX = ARDUGAME_CTRL_STICK_PIN_X, uint8_t pinY = ARDUGAME_CTRL_STICK_PIN_Y);
     void begin() override;
     word readControllerState() override;
     float getRelativeX() override;

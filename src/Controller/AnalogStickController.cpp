@@ -21,7 +21,7 @@
 
 #include "AnalogStickController.h"
 
-AnalogStickController::AnalogStickController(uint8_t pinSwitch = ARDUGAME_CTRL_STICK_PIN_X, uint8_t pinX = ARDUGAME_CTRL_STICK_PIN_X, uint8_t pinY = ARDUGAME_CTRL_STICK_PIN_Y) {
+AnalogStickController::AnalogStickController(uint8_t pinSwitch = ARDUGAME_CTRL_STICK_PIN_SWITCH, uint8_t pinX = ARDUGAME_CTRL_STICK_PIN_X, uint8_t pinY = ARDUGAME_CTRL_STICK_PIN_Y) {
     this->pinSwitch = pinSwitch;
     this->pinX = pinX;
     this->pinY = pinY;
