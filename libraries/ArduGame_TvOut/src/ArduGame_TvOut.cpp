@@ -19,17 +19,17 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "TvGame.h"
+#include "ArduGame_TvOut.h"
 
-TvGame::TvGame(uint8_t width, uint8_t height) {
+ArduGame_TvOut::ArduGame_TvOut(uint8_t width, uint8_t height) {
     this->width = width;
     this->height = height;
 }
 
-TvGame::TvGame() : TvGame(128, 64) {
+ArduGame_TvOut::ArduGame_TvOut() : TvGame(128, 64) {
 }
 
-void TvGame::begin() {
+void ArduGame_TvOut::begin() {
     randomSeed(analogRead(0));
     display.begin(NTSC, width, height);
     setFont(font6x8);
@@ -41,7 +41,7 @@ void TvGame::begin() {
 
 #pragma region Basic flow control
 
-void TvGame::delay(unsigned int ms) {
+void ArduGame_TvOut::delay(unsigned int ms) {
     display.delay(ms);
 }
 
@@ -50,11 +50,11 @@ void TvGame::delay(unsigned int ms) {
 
 #pragma region Audio
 
-void TvGame::tone(unsigned int frequency, unsigned long duration_ms) {
+void ArduGame_TvOut::tone(unsigned int frequency, unsigned long duration_ms) {
     display.tone(frequency, duration_ms);
 }
 
-void TvGame::noTone() {
+void ArduGame_TvOut::noTone() {
     display.noTone();
 }
 
@@ -63,63 +63,63 @@ void TvGame::noTone() {
 
 #pragma region Graphics
 
-void TvGame::clearScreen() {
+void ArduGame_TvOut::clearScreen() {
     display.clear_screen();
 }
 
-void TvGame::setFont(const unsigned char* f) {
+void ArduGame_TvOut::setFont(const unsigned char* f) {
     fontWidth = (int)f[0];
     fontHeight = (int)f[1];
     display.select_font(f);
 }
 
-void TvGame::drawText(const char str[]) {
+void ArduGame_TvOut::drawText(const char str[]) {
     display.print(str);
 }
 
-void TvGame::drawCenteredText(uint8_t y, const char str[]) {
+void ArduGame_TvOut::drawCenteredText(uint8_t y, const char str[]) {
     int x = (width / 2) - ((strlen(str) * (int)fontWidth) / 2);
     display.set_cursor(x, y);
     display.print(str);
 }
 
-void TvGame::setCursor(uint8_t x, uint8_t y) {
+void ArduGame_TvOut::setCursor(uint8_t x, uint8_t y) {
     display.set_cursor(x, y);
 }
 
-void TvGame::fillScreen(uint8_t color) {
+void ArduGame_TvOut::fillScreen(uint8_t color) {
     display.fill(color);
 }
 
-void TvGame::shiftScreen(uint8_t distance, uint8_t direction) {
+void ArduGame_TvOut::shiftScreen(uint8_t distance, uint8_t direction) {
     display.shift(distance, direction);
 }
 
-void TvGame::drawPixel(int8_t x, int8_t y, uint8_t color = COLOR_WHITE) {
+void ArduGame_TvOut::drawPixel(int8_t x, int8_t y, uint8_t color = COLOR_WHITE) {
     display.set_pixel(x, y, color);
 }
 
-void TvGame::drawRect(int8_t x, int8_t y, uint8_t width, uint8_t height, uint8_t color = COLOR_WHITE) {
+void ArduGame_TvOut::drawRect(int8_t x, int8_t y, uint8_t width, uint8_t height, uint8_t color = COLOR_WHITE) {
     display.draw_rect(x, y, width - 1, height - 1, color);
 }
 
-void TvGame::fillRect(int8_t x, int8_t y, uint8_t width, uint8_t height, uint8_t color = COLOR_WHITE) {
+void ArduGame_TvOut::fillRect(int8_t x, int8_t y, uint8_t width, uint8_t height, uint8_t color = COLOR_WHITE) {
     display.draw_rect(x, y, width - 1, height - 1, color);
 }
 
-void TvGame::drawCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = COLOR_WHITE) {
+void ArduGame_TvOut::drawCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = COLOR_WHITE) {
     display.draw_circle(x0, y0, r, color);
 }
 
-void TvGame::fillCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = COLOR_WHITE) {
+void ArduGame_TvOut::fillCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = COLOR_WHITE) {
     display.draw_circle(x0, y0, r, color);
 }
 
-void TvGame::drawLine(int8_t x0, int8_t y0, int8_t x1, int8_t y1, uint8_t color = COLOR_WHITE) {
+void ArduGame_TvOut::drawLine(int8_t x0, int8_t y0, int8_t x1, int8_t y1, uint8_t color = COLOR_WHITE) {
     display.draw_line(x0, y0, x1, y1, color);
 }
 
-void TvGame::drawBitmap(int8_t x, int8_t y, const uint8_t* bitmap, uint8_t width = 0, uint8_t height = 0) {
+void ArduGame_TvOut::drawBitmap(int8_t x, int8_t y, const uint8_t* bitmap, uint8_t width = 0, uint8_t height = 0) {
     display.bitmap(x, y, bitmap, 0, width, height);
 }
 

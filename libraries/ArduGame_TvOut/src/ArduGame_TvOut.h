@@ -43,7 +43,7 @@
 #define ARDUGAME_PIN_SPI_RST 8
 #endif
 
-#include "ArduGame.h"
+#include <ArduGame.h>
 #include <SPI.h>
 #include <TVout.h>
 #include <fontALL.h>
@@ -52,10 +52,10 @@
  * @brief Implements the ArduGame-API for a setup based on TVOut and
  * a simple controller connected to an Arduino Nano
  */
-class TvGame : public ArduGame {
+class ArduGame_TvOut : public ArduGame {
 public:
-    TvGame();
-    TvGame(uint8_t width, uint8_t height);
+    ArduGame_TvOut();
+    ArduGame_TvOut(uint8_t width, uint8_t height);
 
     void begin() override;
 
