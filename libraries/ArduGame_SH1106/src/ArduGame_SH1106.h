@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 André Gewert <agewert@ubergeek.de>
+ * Copyright (c) 2021 André Gewert <agewert@ubergeek.de>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -19,11 +19,12 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef _ARDUGAME_OLEDGAME_H
-#define _ARDUGAME_OLEDGAME_H
+
+#ifndef _ARDUGAME_SH1106_H
+#define _ARDUGAME_SH1106_H
 
 #ifndef _ARDUGAME_CFG
-#define ARDUGAME_PIN_AUDIO 2
+#define ARDUGAME_PIN_AUDIO 11
 #define ARDUGAME_PIN_LED_R 7
 #define ARDUGAME_PIN_LED_G 6
 #define ARDUGAME_PIN_LED_B 5
@@ -38,23 +39,17 @@
 #define ARDUGAME_CTRL_DIGITAL_SET A0
 #define ARDUGAME_CTRL_DIGITAL_RESET 2
 #define ARDUGAME_CTRL_ANALOG_INPUT A5
-#define ARDUGAME_PIN_SPI_DC 9
-#define ARDUGAME_PIN_SPI_CS 10
-#define ARDUGAME_PIN_SPI_RST 8
 #endif
 
-#include "ArduGame.h"
-#include <SPI.h>
-#include <Wire.h>
-#include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
+#include <ArduGame.h>
+#include <lcdgfx.h>
 
-class OledGame : public ArduGame {
+class ArduGame_SH1106 : public ArduGame {
 public:
-    OledGame();
+    ArduGame_SH1106();
 
-    void begin();
-
+    void begin() override;
+    
     // Graphics
     void clearScreen() override;
     void setFont(const unsigned char* f) override;
@@ -70,14 +65,9 @@ public:
     void drawCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = COLOR_WHITE) override;
     void fillCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = COLOR_WHITE) override;
     void drawLine(int8_t x0, int8_t y0, int8_t x1, int8_t y1, uint8_t color = COLOR_WHITE) override;
-    void updateDisplay() override;
-
-    // Additional methods
-    void setFontSize(uint8_t size);
-    void drawBitmap(int8_t x, int8_t y, const uint8_t* bitmap, uint8_t width, uint8_t height, uint8_t color);
 
 public:
-    Adafruit_SSD1306 display;
+    DisplaySH1106_128x64_I2C *display;
 };
 
 #endif

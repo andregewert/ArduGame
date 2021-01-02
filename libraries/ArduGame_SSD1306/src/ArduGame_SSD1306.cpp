@@ -19,16 +19,16 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "OledGame.h"
+#include "ArduGame_SSD1306.h"
 
-OledGame::OledGame() {
+ArduGame_SSD1306::ArduGame_SSD1306() {
     width = 128;
     height = 64;
     fontWidth = 5;
     fontHeight = 7;
 }
 
-void OledGame::begin() {
+void ArduGame_SSD1306::begin() {
     display = Adafruit_SSD1306(
         128, 64, &SPI, ARDUGAME_PIN_SPI_DC, ARDUGAME_PIN_SPI_RST, ARDUGAME_PIN_SPI_CS
     );
@@ -40,71 +40,71 @@ void OledGame::begin() {
 }
 
 // Graphics
-void OledGame::clearScreen() {
+void ArduGame_SSD1306::clearScreen() {
     display.clearDisplay();
 }
 
-void OledGame::setFont(const unsigned char* f) {
+void ArduGame_SSD1306::setFont(const unsigned char* f) {
     // Not supported on Adafruit gfx
 }
 
-void OledGame::drawText(const char str[]) {
+void ArduGame_SSD1306::drawText(const char str[]) {
     display.print(str);
 }
 
-void OledGame::drawCenteredText(uint8_t y, const char str[]) {
+void ArduGame_SSD1306::drawCenteredText(uint8_t y, const char str[]) {
     int x = (width / 2) - ((strlen(str) * (int)fontWidth) / 2);
     display.setCursor(x, y);
     display.print(str);
 }
 
-void OledGame::setCursor(uint8_t x, uint8_t y) {
+void ArduGame_SSD1306::setCursor(uint8_t x, uint8_t y) {
     display.setCursor(x, y);
 }
 
-void OledGame::fillScreen(uint8_t color) {
+void ArduGame_SSD1306::fillScreen(uint8_t color) {
     display.fillScreen(color);
 }
 
-void OledGame::shiftScreen(uint8_t distance, uint8_t direction) {
+void ArduGame_SSD1306::shiftScreen(uint8_t distance, uint8_t direction) {
     // TODO not implemented, yet
 }
 
-void OledGame::drawPixel(int8_t x, int8_t y, uint8_t color = COLOR_WHITE) {
+void ArduGame_SSD1306::drawPixel(int8_t x, int8_t y, uint8_t color = COLOR_WHITE) {
     display.drawPixel(x, y, color);
 }
 
-void OledGame::drawRect(int8_t x, int8_t y, uint8_t width, uint8_t height, uint8_t color = COLOR_WHITE) {
+void ArduGame_SSD1306::drawRect(int8_t x, int8_t y, uint8_t width, uint8_t height, uint8_t color = COLOR_WHITE) {
     display.drawRect(x, y, width, height, color);
 }
 
-void OledGame::fillRect(int8_t x, int8_t y, uint8_t width, uint8_t height, uint8_t color = COLOR_WHITE) {
+void ArduGame_SSD1306::fillRect(int8_t x, int8_t y, uint8_t width, uint8_t height, uint8_t color = COLOR_WHITE) {
     display.fillRect(x, y, width, height, color);
 }
 
-void OledGame::drawBitmap(int8_t x, int8_t y, const uint8_t* bitmap, uint8_t width = 0, uint8_t height = 0) {
+void ArduGame_SSD1306::drawBitmap(int8_t x, int8_t y, const uint8_t* bitmap, uint8_t width = 0, uint8_t height = 0) {
     drawBitmap(x, y, bitmap, width, height, COLOR_WHITE);
 }
 
-void OledGame::drawCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = COLOR_WHITE) {
+void ArduGame_SSD1306::drawCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = COLOR_WHITE) {
     display.drawCircle(x0, y0, r, color);
 }
 
-void OledGame::fillCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = COLOR_WHITE) {
+void ArduGame_SSD1306::fillCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = COLOR_WHITE) {
     display.fillCircle(x0, y0, r, color);
 }
 
-void OledGame::drawLine(int8_t x0, int8_t y0, int8_t x1, int8_t y1, uint8_t color = COLOR_WHITE) {
+void ArduGame_SSD1306::drawLine(int8_t x0, int8_t y0, int8_t x1, int8_t y1, uint8_t color = COLOR_WHITE) {
     display.drawLine(x0, y0, x1, y1, color);
 }
 
-void OledGame::updateDisplay() {
+void ArduGame_SSD1306::updateDisplay() {
     display.display();
 }
 
 #pragma region Additional methods (NOT part of the ArduGame-Interface!)
 
-void OledGame::setFontSize(uint8_t size) {
+void ArduGame_SSD1306::setFontSize(uint8_t size) {
     if (size > 0) {
         display.setTextSize(size);
         fontWidth = 5 *size;
@@ -112,7 +112,7 @@ void OledGame::setFontSize(uint8_t size) {
     }
 }
 
-void OledGame::drawBitmap(int8_t x, int8_t y, const uint8_t* bitmap, uint8_t width, uint8_t height, uint8_t color) {
+void ArduGame_SSD1306::drawBitmap(int8_t x, int8_t y, const uint8_t* bitmap, uint8_t width, uint8_t height, uint8_t color) {
     display.drawBitmap(x, y, bitmap, width, height, color);
 }
 

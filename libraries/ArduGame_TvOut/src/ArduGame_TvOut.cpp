@@ -26,7 +26,7 @@ ArduGame_TvOut::ArduGame_TvOut(uint8_t width, uint8_t height) {
     this->height = height;
 }
 
-ArduGame_TvOut::ArduGame_TvOut() : TvGame(128, 64) {
+ArduGame_TvOut::ArduGame_TvOut() : ArduGame_TvOut(128, 64) {
 }
 
 void ArduGame_TvOut::begin() {
