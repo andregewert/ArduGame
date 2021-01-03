@@ -42,7 +42,7 @@
 #endif
 
 #include <ArduGame.h>
-#include <lcdgfx.h>
+#include <ss_oled.h>
 
 class ArduGame_SH1106 : public ArduGame {
 public:
@@ -51,23 +51,29 @@ public:
     void begin() override;
     
     // Graphics
-    void clearScreen() override;
-    void setFont(const unsigned char* f) override;
-    void drawText(const char str[]) override;
-    void drawCenteredText(uint8_t y, const char str[]) override;
+    void clear() override;
+    void setTextSize(uint8_t size) override;
+    void drawText(char str[]) override;
+    void drawCenteredText(uint8_t y, char str[]) override;
     void setCursor(uint8_t x, uint8_t y) override;
     void fillScreen(uint8_t color) override;
     void shiftScreen(uint8_t distance, uint8_t direction) override;
     void drawPixel(int8_t x, int8_t y, uint8_t color = COLOR_WHITE) override;
     void drawRect(int8_t x, int8_t y, uint8_t width, uint8_t height, uint8_t color = COLOR_WHITE) override;
     void fillRect(int8_t x, int8_t y, uint8_t width, uint8_t height, uint8_t color = COLOR_WHITE) override;
-    void drawBitmap(int8_t x, int8_t y, const uint8_t* bitmap, uint8_t width = 0, uint8_t height = 0) override;
+    void drawBitmap(int8_t x, int8_t y, uint8_t* bitmap, uint8_t width = 0, uint8_t height = 0) override;
     void drawCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = COLOR_WHITE) override;
     void fillCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = COLOR_WHITE) override;
     void drawLine(int8_t x0, int8_t y0, int8_t x1, int8_t y1, uint8_t color = COLOR_WHITE) override;
+    void updateDisplay() override;
 
 public:
-    DisplaySH1106_128x64_I2C *display;
+    // TODO make this private
+    SSOLED display;
+
+private:
+    uint8_t ucBackBuffer[1024];
+    //uint8_t fontSize = 1;
 };
 
 #endif

@@ -32,7 +32,7 @@ ArduGame_TvOut::ArduGame_TvOut() : ArduGame_TvOut(128, 64) {
 void ArduGame_TvOut::begin() {
     randomSeed(analogRead(0));
     display.begin(NTSC, width, height);
-    setFont(font6x8);
+    setTextSize(1);
     frameCounterTime = millis();
     lastFrameMillis = frameCounterTime;
     currentFps = fps;
@@ -63,21 +63,35 @@ void ArduGame_TvOut::noTone() {
 
 #pragma region Graphics
 
-void ArduGame_TvOut::clearScreen() {
+void ArduGame_TvOut::clear() {
     display.clear_screen();
 }
 
-void ArduGame_TvOut::setFont(const unsigned char* f) {
-    fontWidth = (int)f[0];
-    fontHeight = (int)f[1];
-    display.select_font(f);
+void ArduGame_TvOut::setTextSize(uint8_t size = 1) {
+    switch (size) {
+        case 3:
+            display.select_font(font8x8);
+            fontWidth = font8x8[0];
+            fontHeight = font8x8[1];
+            break;
+        case 2:
+            display.select_font(font6x8);
+            fontWidth = font6x8[0];
+            fontHeight = font6x8[1];
+            break;
+        default:
+            display.select_font(font4x6);
+            fontWidth = font4x6[0];
+            fontHeight = font4x6[1];
+            break;
+    }
 }
 
-void ArduGame_TvOut::drawText(const char str[]) {
+void ArduGame_TvOut::drawText(char str[]) {
     display.print(str);
 }
 
-void ArduGame_TvOut::drawCenteredText(uint8_t y, const char str[]) {
+void ArduGame_TvOut::drawCenteredText(uint8_t y, char str[]) {
     int x = (width / 2) - ((strlen(str) * (int)fontWidth) / 2);
     display.set_cursor(x, y);
     display.print(str);
@@ -119,7 +133,7 @@ void ArduGame_TvOut::drawLine(int8_t x0, int8_t y0, int8_t x1, int8_t y1, uint8_
     display.draw_line(x0, y0, x1, y1, color);
 }
 
-void ArduGame_TvOut::drawBitmap(int8_t x, int8_t y, const uint8_t* bitmap, uint8_t width = 0, uint8_t height = 0) {
+void ArduGame_TvOut::drawBitmap(int8_t x, int8_t y, uint8_t* bitmap, uint8_t width = 0, uint8_t height = 0) {
     display.bitmap(x, y, bitmap, 0, width, height);
 }
 

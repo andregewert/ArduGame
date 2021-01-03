@@ -22,42 +22,71 @@
 #include "ArduGame_SH1106.h"
 
 ArduGame_SH1106::ArduGame_SH1106() {
-    display = new DisplaySH1106_128x64_I2C(-1);
     width = 128;
-    height = 128;
+    height = 64;
     fontWidth = 6;
     fontHeight = 8;
 }
 
 void ArduGame_SH1106::begin() {
-    display->begin();
-    display->setFixedFont(ssd1306xled_font6x8);
+    oledInit(&display, OLED_128x64, -1, 0, 0, 1, -1, -1, -1, 800000L);
+    oledFill(&display, 0, 1);
+    oledSetBackBuffer(&display, ucBackBuffer);
 }
 
-void ArduGame_SH1106::clearScreen() {
-    display->clear();
+void ArduGame_SH1106::clear() {
+    oledFill(&display, 0, 1);
 }
 
-void ArduGame_SH1106::setFont(const unsigned char* f) {
-    // different type ...
+void ArduGame_SH1106::setTextSize(uint8_t size) {
+    switch (size) {
+        case 4:
+            fontWidth = 16;
+            fontHeight = 32;
+            break;
+        case 3:
+            fontWidth = 16;
+            fontHeight = 16;
+            break;
+        case 2:
+            fontWidth = 8;
+            fontHeight = 8;
+            break;
+        default:
+            fontWidth = 6;
+            fontHeight = 8;
+
+    }
 }
 
-void ArduGame_SH1106::drawText(const char str[]) {
-    // TODO not implemented yet
+void ArduGame_SH1106::drawText(char str[]) {
+    if (fontWidth == 6 && fontHeight == 8) {
+        oledWriteString(&display, 0, display.iCursorX, display.iCursorY, str, FONT_SMALL, 0, 1);
+    } else if (fontWidth == 8 && fontHeight == 8) {
+        oledWriteString(&display, 0, display.iCursorX, display.iCursorY, str, FONT_NORMAL, 0, 1);
+    } else if (fontWidth == 16 && fontHeight == 16) {
+        oledWriteString(&display, 0, display.iCursorX, display.iCursorY, str, FONT_STRETCHED, 0, 1);
+    } else if (fontWidth == 16 && fontHeight == 32) {
+        oledWriteString(&display, 0, display.iCursorX, display.iCursorY, str, FONT_LARGE, 0, 1);
+    }
 }
 
-void ArduGame_SH1106::drawCenteredText(uint8_t y, const char str[]) {
+void ArduGame_SH1106::drawCenteredText(uint8_t y, char str[]) {
     int x = (width / 2) - ((strlen(str) * (int)fontWidth) / 2);
-    display->setTextCursor(x, y);
-    // TODO not implemented yet
+    oledSetCursor(&display, x, y);
+    drawText(str);
 }
 
 void ArduGame_SH1106::setCursor(uint8_t x, uint8_t y) {
-    display->setTextCursor(x, y);
+    oledSetCursor(&display, x, y);
 }
 
 void ArduGame_SH1106::fillScreen(uint8_t color) {
-    display->fill(color);
+    if (color == COLOR_WHITE) {
+        oledFill(&display, 1, 1);
+    } else {
+        oledFill(&display, 0, 1);
+    }
 }
 
 void ArduGame_SH1106::shiftScreen(uint8_t distance, uint8_t direction) {
@@ -65,29 +94,37 @@ void ArduGame_SH1106::shiftScreen(uint8_t distance, uint8_t direction) {
 }
 
 void ArduGame_SH1106::drawPixel(int8_t x, int8_t y, uint8_t color = COLOR_WHITE) {
-    display->drawRect(x, y, x, y);
+    if (color == COLOR_WHITE) {
+        oledSetPixel(&display, x, y, 1, 1);
+    } else {
+        oledSetPixel(&display, x, y, 0, 1);
+    }
 }
 
 void ArduGame_SH1106::drawRect(int8_t x, int8_t y, uint8_t width, uint8_t height, uint8_t color = COLOR_WHITE) {
-    display->drawRect(x, y, x + width - 1, y + height - 1);
+    oledRectangle(&display, x, y, x +width -1, y +height -1, color, 0);
 }
 
 void ArduGame_SH1106::fillRect(int8_t x, int8_t y, uint8_t width, uint8_t height, uint8_t color = COLOR_WHITE) {
-    display->fillRect(x, y, x + width - 1, y + height - 1);
+    oledRectangle(&display, x, y, x + width - 1, y + height - 1, color, 1);
 }
 
-void ArduGame_SH1106::drawBitmap(int8_t x, int8_t y, const uint8_t* bitmap, uint8_t width = 0, uint8_t height = 0) {
-    display->drawBitmap1(x, y, width, height, bitmap);
+void ArduGame_SH1106::drawBitmap(int8_t x, int8_t y, uint8_t* bitmap, uint8_t width = 0, uint8_t height = 0) {
+    oledDrawSprite(&display, bitmap, width, height, 0, x, y, 1);
 }
 
 void ArduGame_SH1106::drawCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = COLOR_WHITE) {
-    display->drawCircle(x0, y0, r);
+    oledEllipse(&display, x0, y0, r, r, color, 0);
 }
 
 void ArduGame_SH1106::fillCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = COLOR_WHITE) {
-    //display.fillCircle(x0, y0, r);
+    oledEllipse(&display, x0, y0, r, r, color, 1);
 }
 
 void ArduGame_SH1106::drawLine(int8_t x0, int8_t y0, int8_t x1, int8_t y1, uint8_t color = COLOR_WHITE) {
-    display->drawLine(x0, y0, x1, y1);
+    oledDrawLine(&display, x0, y0, x1, y1, 1);
 }
+
+void ArduGame_SH1106::updateDisplay() {
+    oledDumpBuffer(&display, NULL);
+};

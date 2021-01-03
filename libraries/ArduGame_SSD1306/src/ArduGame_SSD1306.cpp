@@ -40,19 +40,23 @@ void ArduGame_SSD1306::begin() {
 }
 
 // Graphics
-void ArduGame_SSD1306::clearScreen() {
+void ArduGame_SSD1306::clear() {
     display.clearDisplay();
 }
 
-void ArduGame_SSD1306::setFont(const unsigned char* f) {
-    // Not supported on Adafruit gfx
+void ArduGame_SSD1306::setTextSize(uint8_t size) {
+    if (size > 0) {
+        display.setTextSize(size);
+        fontWidth = 6 * size;
+        fontHeight = 7 * size;
+    }
 }
 
-void ArduGame_SSD1306::drawText(const char str[]) {
+void ArduGame_SSD1306::drawText(char str[]) {
     display.print(str);
 }
 
-void ArduGame_SSD1306::drawCenteredText(uint8_t y, const char str[]) {
+void ArduGame_SSD1306::drawCenteredText(uint8_t y, char str[]) {
     int x = (width / 2) - ((strlen(str) * (int)fontWidth) / 2);
     display.setCursor(x, y);
     display.print(str);
@@ -82,7 +86,7 @@ void ArduGame_SSD1306::fillRect(int8_t x, int8_t y, uint8_t width, uint8_t heigh
     display.fillRect(x, y, width, height, color);
 }
 
-void ArduGame_SSD1306::drawBitmap(int8_t x, int8_t y, const uint8_t* bitmap, uint8_t width = 0, uint8_t height = 0) {
+void ArduGame_SSD1306::drawBitmap(int8_t x, int8_t y, uint8_t* bitmap, uint8_t width = 0, uint8_t height = 0) {
     drawBitmap(x, y, bitmap, width, height, COLOR_WHITE);
 }
 
@@ -104,15 +108,7 @@ void ArduGame_SSD1306::updateDisplay() {
 
 #pragma region Additional methods (NOT part of the ArduGame-Interface!)
 
-void ArduGame_SSD1306::setFontSize(uint8_t size) {
-    if (size > 0) {
-        display.setTextSize(size);
-        fontWidth = 5 *size;
-        fontHeight = 7 *size;
-    }
-}
-
-void ArduGame_SSD1306::drawBitmap(int8_t x, int8_t y, const uint8_t* bitmap, uint8_t width, uint8_t height, uint8_t color) {
+void ArduGame_SSD1306::drawBitmap(int8_t x, int8_t y, uint8_t* bitmap, uint8_t width, uint8_t height, uint8_t color) {
     display.drawBitmap(x, y, bitmap, width, height, color);
 }
 

@@ -87,17 +87,18 @@ public:
 
     #pragma region Graphics
     
-    virtual void clearScreen() = 0;
-    virtual void setFont(const unsigned char* f) = 0;
-    virtual void drawText(const char str[]) = 0;
-    virtual void drawCenteredText(uint8_t y, const char str[]) = 0;
+    virtual void clear() = 0;
+    //virtual void setFont(const unsigned char* f) = 0;
+    virtual void setTextSize(uint8_t size = 1) = 0;
+    virtual void drawText(char str[]) = 0;
+    virtual void drawCenteredText(uint8_t y, char str[]) = 0;
     virtual void setCursor(uint8_t x, uint8_t y) = 0;
     virtual void fillScreen(uint8_t color) = 0;
     virtual void shiftScreen(uint8_t distance, uint8_t direction) = 0;
     virtual void drawPixel(int8_t x, int8_t y, uint8_t color = COLOR_WHITE) = 0;
     virtual void drawRect(int8_t x, int8_t y, uint8_t width, uint8_t height, uint8_t color = COLOR_WHITE) = 0;
     virtual void fillRect(int8_t x, int8_t y, uint8_t width, uint8_t height, uint8_t color = COLOR_WHITE) = 0;
-    virtual void drawBitmap(int8_t x, int8_t y, const uint8_t* bitmap, uint8_t width = 0, uint8_t height = 0) = 0;
+    virtual void drawBitmap(int8_t x, int8_t y, uint8_t* bitmap, uint8_t width = 0, uint8_t height = 0) = 0;
     virtual void drawCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = COLOR_WHITE) = 0;
     virtual void fillCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = COLOR_WHITE) = 0;
     virtual void drawLine(int8_t x0, int8_t y0, int8_t x1, int8_t y1, uint8_t color = COLOR_WHITE) = 0;
