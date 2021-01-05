@@ -73,7 +73,7 @@ public:
     void updateDisplay() override;
 
     // Additional methods
-    void drawBitmap(int8_t x, int8_t y, uint8_t* bitmap, uint8_t width, uint8_t height, uint8_t color);
+    void drawBitmap(int8_t x, int8_t y, const uint8_t* bitmap, uint8_t width, uint8_t height, uint8_t color);
 
 public:
     // TODO make this private

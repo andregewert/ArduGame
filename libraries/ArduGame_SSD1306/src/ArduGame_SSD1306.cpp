@@ -33,10 +33,10 @@ void ArduGame_SSD1306::begin() {
         128, 64, &SPI, ARDUGAME_PIN_SPI_DC, ARDUGAME_PIN_SPI_RST, ARDUGAME_PIN_SPI_CS
     );
     display.begin(SSD1306_SWITCHCAPVCC);
-    display.setTextSize(1);
     display.setTextColor(SSD1306_WHITE);
     display.clearDisplay();
     display.display();
+    setTextSize(1);
 }
 
 // Graphics
@@ -108,7 +108,7 @@ void ArduGame_SSD1306::updateDisplay() {
 
 #pragma region Additional methods (NOT part of the ArduGame-Interface!)
 
-void ArduGame_SSD1306::drawBitmap(int8_t x, int8_t y, uint8_t* bitmap, uint8_t width, uint8_t height, uint8_t color) {
+void ArduGame_SSD1306::drawBitmap(int8_t x, int8_t y, const uint8_t* bitmap, uint8_t width, uint8_t height, uint8_t color) {
     display.drawBitmap(x, y, bitmap, width, height, color);
 }
 
