@@ -20,8 +20,8 @@
  */
 
 
-#ifndef _ARDUGAME_SH1106_H
-#define _ARDUGAME_SH1106_H
+#ifndef _ARDUGAME_U8G2_H
+#define _ARDUGAME_U8G2_H
 
 #ifndef _ARDUGAME_CFG
 #define ARDUGAME_PIN_AUDIO 11
@@ -42,13 +42,22 @@
 #endif
 
 #include <ArduGame.h>
-#include <ss_oled.h>
+#include <U8g2lib.h>
+#undef U8G2_WITH_UNICODE
 
-class ArduGame_SH1106 : public ArduGame {
+#ifdef U8X8_HAVE_HW_SPI
+#include <SPI.h>
+#endif
+#ifdef U8X8_HAVE_HW_I2C
+#include <Wire.h>
+#endif
+
+class ArduGame_U8G2 : public ArduGame {
 public:
-    ArduGame_SH1106();
+    ArduGame_U8G2();
 
     void begin() override;
+    void begin(U8G2* u8g2);
     
     // Graphics
     void clear() override;
@@ -69,11 +78,10 @@ public:
 
 public:
     // TODO make this private
-    SSOLED display;
+    U8G2* display;
 
 private:
-    uint8_t ucBackBuffer[1024];
-    //uint8_t fontSize = 1;
+    uint8_t fontSize = 1;
 };
 
 #endif
