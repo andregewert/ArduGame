@@ -38,6 +38,7 @@ void ArduGame::setFps(uint8_t fps) {
     this->fps = fps;
 }
 
+// TODO first frame is not handled correct yet
 bool ArduGame::nextFrame() {
     currentMillis = millis();
     diffMillis = currentMillis - lastFrameMillis;
@@ -59,6 +60,10 @@ bool ArduGame::nextFrame() {
 
 bool ArduGame::everyXFrames(uint8_t frames) {
     return frameCount % frames == 0;
+}
+
+bool ArduGame::everyXPartOfASecond(uint8_t which, uint8_t parts) {
+    return frameCount / (uint8_t)(fps /parts) == which -1;
 }
 
 void ArduGame::delay(unsigned int ms) {

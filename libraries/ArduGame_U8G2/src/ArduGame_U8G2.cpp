@@ -111,7 +111,6 @@ void ArduGame_U8G2::drawCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = 
 }
 
 void ArduGame_U8G2::fillCircle(int8_t x0, int8_t y0, uint8_t r, uint8_t color = COLOR_WHITE) {
-    //display->setDrawColor(color);
     display->drawDisc(x0, y0, r);
 }
 

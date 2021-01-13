@@ -58,6 +58,16 @@ public:
     bool everyXFrames(uint8_t frames);
 
     /**
+     * @brief Return true if current game loop is within a given part of a second
+     * 
+     * @param which Number of the desired part
+     * @param parts Number of fractions for one second
+     * @return true If loop is within the specified part / fraction of a whole second
+     * @return false Otherwise
+     */
+    bool everyXPartOfASecond(uint8_t which, uint8_t parts);
+
+    /**
      * @brief Delays the execution of the game for the specified number of milli seconds
      *
      * @param ms Time to delay
