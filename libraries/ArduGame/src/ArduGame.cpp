@@ -40,6 +40,14 @@ void ArduGame::setFps(uint8_t fps) {
 
 // TODO first frame is not handled correct yet
 bool ArduGame::nextFrame() {
+
+    // First frame
+    if (lastFrameMillis == 0) {
+        lastFrameMillis = millis();
+        frameCounterTime = lastFrameMillis;
+        return true;
+    }
+
     currentMillis = millis();
     diffMillis = currentMillis - lastFrameMillis;
 
@@ -48,6 +56,12 @@ bool ArduGame::nextFrame() {
         lastFrameMillis = currentMillis - overtime;
         frameCount++;
 
+        // This may drop some frames if the loop is running too slow
+        // This could break the whole game; so we should consider
+        // to remove these calculations and spare some resources.
+        // Another possibility is to seperate updating and drawing the game
+        // and just drop some screen update. ATM I think this would
+        // be too much overhead and we *should* just remove this code.
         if (currentMillis - frameCounterTime >= 1000) {
             currentFps = frameCount;
             frameCount = 0;
