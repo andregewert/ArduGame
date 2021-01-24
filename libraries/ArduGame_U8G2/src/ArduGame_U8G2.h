@@ -43,7 +43,6 @@
 
 #include <ArduGame.h>
 #include <U8g2lib.h>
-#undef U8G2_WITH_UNICODE
 
 #ifdef U8X8_HAVE_HW_SPI
 #include <SPI.h>
