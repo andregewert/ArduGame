@@ -61,6 +61,8 @@ public:
 
     void delay(unsigned int ms) override;
 
+    unsigned long getSystemTime() override;
+
     // Audio
 
     /**

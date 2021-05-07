@@ -19,7 +19,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "DigitialButtonsController.h"
+#include "DigitalButtonsController.h"
 
 DigitalButtonsController::DigitalButtonsController(
     uint8_t pinUp = ARDUGAME_CTRL_DIGITAL_UP,

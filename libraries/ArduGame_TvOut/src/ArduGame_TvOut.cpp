@@ -33,9 +33,6 @@ void ArduGame_TvOut::begin() {
     randomSeed(analogRead(0));
     display.begin(NTSC, width, height);
     setTextSize(1);
-    frameCounterTime = millis();
-    lastFrameMillis = frameCounterTime;
-    currentFps = fps;
 }
 
 
@@ -43,6 +40,10 @@ void ArduGame_TvOut::begin() {
 
 void ArduGame_TvOut::delay(unsigned int ms) {
     display.delay(ms);
+}
+
+unsigned long ArduGame_TvOut::getSystemTime() {
+    return display.millis();
 }
 
 #pragma endregion

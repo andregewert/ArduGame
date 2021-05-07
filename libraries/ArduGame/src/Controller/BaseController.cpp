@@ -25,6 +25,8 @@ BaseController::BaseController() {
 }
 
 void BaseController::begin() {
+    currentState = BUTTON_NONE;
+    lastState = BUTTON_NONE;
 }
 
 void BaseController::updateControllerState() {

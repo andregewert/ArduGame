@@ -74,6 +74,13 @@ public:
      */
     virtual void delay(unsigned int ms);
 
+    /**
+     * @brief Returns the system time in milli seconds
+     * 
+     * @return unsigned long 
+     */
+    virtual unsigned long getSystemTime();
+
     #pragma endregion
 
 
@@ -178,11 +185,11 @@ protected:
      */
     uint8_t fps = 20;
 
-    unsigned long lastFrameMillis = 0;
-    unsigned long currentMillis = 0;
-    unsigned long diffMillis = 0;
-    unsigned long overtime = 0;
-    unsigned long frameCounterTime = 0;
+    unsigned long lastFrameTime = 0;
+    unsigned long currentFrameTime = 0;
+    unsigned long frameDelta = 0;
+    unsigned long frameDuration = 50;
+
 };
 
 #endif
