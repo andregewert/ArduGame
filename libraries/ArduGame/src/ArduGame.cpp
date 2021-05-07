@@ -36,8 +36,33 @@ void ArduGame::begin() {
 
 void ArduGame::setFps(uint8_t fps) {
     this->fps = fps;
+    frameDuration = 1000 /fps;
 }
 
+bool ArduGame::nextFrame() {
+
+    // First frame
+    if (currentFrameTime == 0) {
+        currentFrameTime = getSystemTime();
+        lastFrameTime = currentFrameTime;
+        return true;
+    }
+
+    currentFrameTime = getSystemTime();
+    frameDelta = currentFrameTime - lastFrameTime;
+
+    if (frameDelta >= frameDuration) {
+        lastFrameTime = currentFrameTime;
+        frameCount++;
+        if (frameCount + 1 >= fps) {
+            frameCount = 0;
+        }
+        return true;
+    }
+    return false;
+}
+
+/*
 // TODO first frame is not handled correct yet
 bool ArduGame::nextFrame() {
 
@@ -71,6 +96,7 @@ bool ArduGame::nextFrame() {
     }
     return false;
 }
+*/
 
 bool ArduGame::everyXFrames(uint8_t frames) {
     return frameCount % frames == 0;
@@ -82,6 +108,10 @@ bool ArduGame::everyXPartOfASecond(uint8_t which, uint8_t parts) {
 
 void ArduGame::delay(unsigned int ms) {
     ::delay(ms);
+}
+
+unsigned long ArduGame::getSystemTime() {
+    return millis();
 }
 
 #pragma endregion
